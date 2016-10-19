@@ -1,4 +1,4 @@
 class Activity < ActiveRecord::Base
   belongs_to :project
-  belongs_to :program, through :project
+  delegate :program, to: :project
 end
