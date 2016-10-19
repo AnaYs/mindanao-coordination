@@ -1,2 +1,8 @@
 <h1>Programs#show</h1>
 <p>Find me in app/views/programs/show.html.erb</p>
+<h2> <%= @program.name %></h2>
+
+<p> <%= @program.main_office %></p>
+
+<%= link_to 'all programs', programs_path %>
+<%= link_to 'edit', edit_program_path %>

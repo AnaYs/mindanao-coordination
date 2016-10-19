@@ -1,2 +1,12 @@
-<h1>Programs#index</h1>
-<p>Find me in app/views/programs/index.html.erb</p>
+<h1>Programs in Mindanao</h1>
+
+<% @programs.each do |program| %>
+
+  <%= link_to program_path(program) do %>
+    <h2> <%= program.name %></h2>
+  <% end %>
+  <p> <%= program.main_office %></p>
+
+<% end %>
+
+<%= link_to 'add your program', new_program_path %>
