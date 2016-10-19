@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :programs, only: [:new, :create, :show, :edit, :update] do
+  resources :programs, only: [:index, :new, :create, :show, :edit, :update] do
     resources :projects, only: [:new, :create, :show, :edit, :update] do
       resources :activities, only: [:new, :create, :show, :edit, :update]
     end
