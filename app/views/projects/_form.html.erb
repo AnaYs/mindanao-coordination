@@ -1,0 +1,12 @@
+<%= form_for([@program, @project]) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :main_office %>
+  <%= f.text_field :main_office %>
+
+  <%= f.label :area_of_work %>
+  <%= f.text_field :area_of_work %>
+
+  <%= f.submit %>
+<% end %>

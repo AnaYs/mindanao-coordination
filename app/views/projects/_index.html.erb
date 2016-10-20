@@ -1,0 +1,9 @@
+<h1>Projects in <%= @program.name %></h1>
+
+<% @program.projects.each do |p| %>
+  <%= link_to program_project_path(@program, p) do %>
+    <p><%= p.name %></p>
+  <% end %>
+<% end %>
+
+<%= link_to 'add your project', new_program_project_path(program_id: @program.id) %>
