@@ -2,7 +2,11 @@ class ProgramsController < ApplicationController
   before_action :set_program, only: [:show, :edit, :update]
 
   def index
-    @programs = Program.all
+    @programs = Program.where.not(latitude: nil, longitude: nil)
+    @hash = Gmaps4rails.build_markers(@programs) do |program, marker|
+      marker.lat program.latitude
+      marker.lng program.longitude
+    end
   end
 
   def show
