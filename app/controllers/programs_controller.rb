@@ -24,6 +24,7 @@ class ProgramsController < ApplicationController
 
   def update
     @program.update(program_params)
+
     redirect_to program_path(@program)
   end
 
