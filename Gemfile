@@ -16,6 +16,9 @@ gem "sdoc", "~> 0.4.0", group: :doc
 gem "geocoder"
 gem "gmaps4rails"
 
+#Securing API keys
+gem "figaro"
+
 group :development, :test do
   gem "byebug"
 end
