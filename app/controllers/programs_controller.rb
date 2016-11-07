@@ -6,6 +6,7 @@ class ProgramsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@programs) do |program, marker|
       marker.lat program.latitude
       marker.lng program.longitude
+      marker.infowindow render_to_string(partial: "/programs/infowindow", locals: { program: program })
     end
   end
 
