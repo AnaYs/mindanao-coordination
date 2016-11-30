@@ -19,6 +19,9 @@ gem "gmaps4rails"
 #Securing API keys
 gem "figaro"
 
+#User authentication
+gem "devise"
+
 group :development, :test do
   gem "byebug"
 end
