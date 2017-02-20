@@ -2,7 +2,7 @@ class ProgramsController < ApplicationController
   before_action :set_program, only: [:show, :edit, :update]
 
   def index
-    @programs = Program.where.not(latitude: nil, longitude: nil)
+    @programs = find_programs
     @hash = Gmaps4rails.build_markers(@programs) do |program, marker|
       marker.lat program.latitude
       marker.lng program.longitude
@@ -39,6 +39,13 @@ class ProgramsController < ApplicationController
   end
 
 private
+  def find_programs
+    if params[:search]
+      Program.near(params[:search], 20).order("name")
+    else
+      Program.all
+    end
+  end
 
   def set_program
     @program = Program.find(params[:id])

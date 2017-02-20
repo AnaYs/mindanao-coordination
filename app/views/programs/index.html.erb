@@ -1,3 +1,9 @@
+<%= form_tag(programs_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Programs" %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>
+
+
 <h1>Programs in Mindanao</h1>
 
 <% @programs.each do |program| %>
