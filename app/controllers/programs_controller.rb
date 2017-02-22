@@ -40,8 +40,15 @@ class ProgramsController < ApplicationController
 
 private
   def find_programs
-    if params[:search]
-      Program.near(params[:search], 20).order("name")
+
+    if params[:location].present? && params[:search].present?
+      @print = "Hello"
+      Program.near(params[:location], 50).order("name")
+    elsif params[:location].present?
+      Program.near(params[:location], 50).order("name")
+    elsif params[:search].present?
+      @print = "Hello"
+      Program.all
     else
       Program.all
     end
