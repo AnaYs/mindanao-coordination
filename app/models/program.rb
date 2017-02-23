@@ -7,8 +7,7 @@ class Program < ActiveRecord::Base
   after_validation :geocode, if: :main_office_changed?
   validates :name, :main_office, presence: true
 
-  def self.search
-
-  end
+  include PgSearch
+  multisearchable against: [:name, :area_of_work, :organisation]
 end
 
