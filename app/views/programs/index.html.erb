@@ -7,7 +7,6 @@
 
 <h1>Programs in Mindanao</h1>
 
-<%= @print.present? ? @print : "no key word" %>
 <% @programs.each do |program| %>
 
   <%= link_to program_path(program) do %>

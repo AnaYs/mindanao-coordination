@@ -40,18 +40,27 @@ class ProgramsController < ApplicationController
 
 private
   def find_programs
-
     if params[:location].present? && params[:search].present?
-      @print = "Hello"
-      Program.near(params[:location], 50).order("name")
+      programs_based_on_location & programs_based_on_keyword
     elsif params[:location].present?
-      Program.near(params[:location], 50).order("name")
+      programs_based_on_location
     elsif params[:search].present?
-      @print = "Hello"
-      Program.all
+      programs_based_on_keyword
     else
       Program.all
     end
+  end
+
+  def programs_based_on_location
+    Program.near(params[:location], 50).order("name")
+  end
+
+  def programs_based_on_keyword
+    results = []
+    PgSearch.multisearch(params[:search]).each do |document|
+      results << document.searchable
+    end
+    results
   end
 
   def set_program
