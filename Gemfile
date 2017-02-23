@@ -16,6 +16,9 @@ gem "sdoc", "~> 0.4.0", group: :doc
 gem "geocoder"
 gem "gmaps4rails"
 
+#Searchfunction
+gem "pg_search"
+
 #Securing API keys
 gem "figaro"
 

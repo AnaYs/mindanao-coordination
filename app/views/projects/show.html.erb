@@ -1,9 +1,35 @@
-<h1>Projects#show</h1>
-<p>Find me in app/views/projects/show.html.erb</p>
-<h2><%= @project.name %></h2>
+<h1>Project of <%= @program.name %>: <%= @project.name %></h1>
 <p>Area of work: <%= @project.area_of_work %></p>
 <p>Organisation: <%= @project.organisation %></p>
 
 
 <%= link_to "all projects of #{@project.program.name}", program_path(@project.program) %> |
 <%=  link_to "edit",  edit_program_project_path(@program, @project) %>
+
+<div id="map" style="width: 50%; height: 400px;"></div>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      var mapOptions = {
+        scrollwheel: false,
+        mapTypeId: google.maps.MapTypeId.SATELLITE
+      };
+      var handler = Gmaps.build('Google');
+      handler.buildMap({
+        provider: mapOptions,
+        internal: { id:
+        'map' } }, function() {
+        markers = handler.addMarkers(<%= raw @project_hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        if (markers.length == 0) {
+          handler.getMap().setZoom(2);
+        } else if (markers.length == 1) {
+          handler.getMap().setZoom(16);
+        }
+        }
+      );
+    });
+  <% end %>
+<% end %>
