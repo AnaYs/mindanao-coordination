@@ -7,6 +7,11 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @project_hash = Gmaps4rails.build_markers(@project) do |project, marker|
+      marker.lat project.latitude
+      marker.lng project.longitude
+      marker.infowindow render_to_string(partial: "/projects/infowindow", locals: { project: project })
+    end
   end
 
   def new
