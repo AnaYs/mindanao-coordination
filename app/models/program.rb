@@ -1,4 +1,5 @@
 class Program < ActiveRecord::Base
+  include PgSearch
   has_many :profiles
   has_many :projects
   has_many :activities, through: :project
@@ -7,7 +8,6 @@ class Program < ActiveRecord::Base
   after_validation :geocode, if: :main_office_changed?
   validates :name, :main_office, presence: true
 
-  include PgSearch
   multisearchable against: [:name, :area_of_work, :organisation]
 end
 

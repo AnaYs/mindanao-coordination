@@ -7,6 +7,10 @@
 
 <h1>Programs in Mindanao</h1>
 
+<% if @programs.empty? && @projects.empty? %>
+  <h4>Sorry, there were no results for your query.</h4>
+<% end %>
+
 <% @programs.each do |program| %>
 
   <%= link_to program_path(program) do %>
@@ -14,6 +18,17 @@
   <% end %>
   <p> <%= program.main_office %></p>
 
+<% end %>
+
+<% if @projects.present? %>
+  <% @projects.each do |project| %>
+    <h2> Relevant Projects: </h2>
+    <%= link_to program_project_path(project.program, project) do %>
+      <h3> <%= project.name %></h3>
+    <% end %>
+    <p> Program: <%= project.program.name %> </p>
+    <p> <%= project.main_office %></p>
+  <% end %>
 <% end %>
 
 <%= link_to 'add your program', new_program_path %>
