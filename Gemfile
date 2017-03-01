@@ -19,6 +19,9 @@ gem "gmaps4rails"
 #Searchfunction
 gem "pg_search"
 
+#Devise for easy authentication
+gem "devise"
+
 #Securing API keys
 gem "figaro"
 
