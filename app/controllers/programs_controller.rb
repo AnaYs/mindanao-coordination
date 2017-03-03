@@ -1,6 +1,6 @@
 class ProgramsController < ApplicationController
   before_action :set_program, only: [:show, :edit, :update]
-
+  skip_before_action :authenticate_user!, only: :index
   def index
     find_programs
     @hash = Gmaps4rails.build_markers(@programs) do |program, marker|
