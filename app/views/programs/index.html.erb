@@ -6,8 +6,7 @@
 
 
 <h1>Programs in Mindanao</h1>
-
-<% if @programs.empty? && @projects.empty? %>
+<% unless @results.nil? %>
   <h4>Sorry, there were no results for your query.</h4>
 <% end %>
 
@@ -21,13 +20,25 @@
 <% end %>
 
 <% if @projects.present? %>
+  <h2> Relevant Projects: </h2>
   <% @projects.each do |project| %>
-    <h2> Relevant Projects: </h2>
     <%= link_to program_project_path(project.program, project) do %>
       <h3> <%= project.name %></h3>
     <% end %>
     <p> Program: <%= project.program.name %> </p>
     <p> <%= project.main_office %></p>
+  <% end %>
+<% end %>
+
+<% if @users.present? %>
+  <h2> Users: </h2>
+  <% @users.each do |user| %>
+ <%#= link_to program_project_path(project.program, project) do %>
+      <h3> <%= user.fullname %></h3>
+    <%# end %>
+    <p> Program: <%= user.program.name %> </p>
+    <p> Organisation: <%= user.program.organisation %> </p>
+    <p> Expertise: <%= user.expertise %></p>
   <% end %>
 <% end %>
 

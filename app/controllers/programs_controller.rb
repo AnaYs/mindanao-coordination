@@ -45,6 +45,7 @@ private
     elsif params[:location].present?
       @programs = programs_based_on_location
       @projects = projects_based_on_location
+      @users = users_based_on_location
     else
       @programs = Program.all
     end
@@ -58,21 +59,29 @@ private
     Project.near(params[:location], 50).order("name")
   end
 
+  def users_based_on_location
+    User.near(params[:location], 50).order("fullname")
+  end
+
   def results_based_on_keyword
     @results = PgSearch.multisearch(params[:search])
     @programs = []
     @projects = []
+    @users = []
 
     @results.each do |document|
       if document.searchable_type == "Program"
         @programs << document.searchable
-      else
+      elsif document.searchable_type == "Project"
         @projects << document.searchable
+      else
+        @users << document.searchable
       end
     end
     if params[:location].present?
       @programs = (@programs & programs_based_on_location)
       @projects = (@projects & projects_based_on_location)
+      @users = (@users & users_based_on_location)
     end
   end
 
