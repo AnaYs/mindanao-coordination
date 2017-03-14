@@ -11,7 +11,8 @@ class ProgramsController < ApplicationController
   end
 
   def show
-    @projects_hash = Gmaps4rails.build_markers(@program.projects) do |project, marker|
+    markers = @program.projects.empty? ? @program : @program.projects
+    @projects_hash = Gmaps4rails.build_markers(markers) do |project, marker|
       marker.lat project.latitude
       marker.lng project.longitude
       marker.infowindow render_to_string(partial: "/projects/infowindow", locals: { project: project })
