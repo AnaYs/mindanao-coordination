@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
 
   devise_for :users
+  resources :users, :only => [:show]
+
   resources :programs, only: [:index, :new, :create, :show, :edit, :update] do
     resources :projects, only: [:index, :new, :create, :show, :edit, :update] do
       resources :activities, only: [:index, :new, :create, :show, :edit, :update]
     end
   end
+
+
 
   root 'programs#index'
 

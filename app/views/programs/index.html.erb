@@ -33,9 +33,9 @@
 <% if @users.present? %>
   <h2> Users: </h2>
   <% @users.each do |user| %>
- <%#= link_to program_project_path(project.program, project) do %>
+    <%= link_to user_path(user) do %>
       <h3> <%= user.fullname %></h3>
-    <%# end %>
+    <% end %>
     <p> Program: <%= user.program.name %> </p>
     <p> Organisation: <%= user.program.organisation %> </p>
     <p> Expertise: <%= user.expertise %></p>
