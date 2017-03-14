@@ -1,0 +1,6 @@
+<h2><%= @user.fullname %></h2>
+<p>Program: <%= @user.program.name %></p>
+<p>Organisation: <%= @user.program.organisation %></p>
+<p>Expertise: <%= @user.expertise %></p>
+
+<%= link_to 'all programs', programs_path %>

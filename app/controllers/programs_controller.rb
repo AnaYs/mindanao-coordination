@@ -1,6 +1,6 @@
 class ProgramsController < ApplicationController
   before_action :set_program, only: [:show, :edit, :update]
-
+  skip_before_action :authenticate_user!, only: :index
   def index
     find_programs
     @hash = Gmaps4rails.build_markers(@programs) do |program, marker|
@@ -11,7 +11,8 @@ class ProgramsController < ApplicationController
   end
 
   def show
-    @projects_hash = Gmaps4rails.build_markers(@program.projects) do |project, marker|
+    markers = @program.projects.empty? ? @program : @program.projects
+    @projects_hash = Gmaps4rails.build_markers(markers) do |project, marker|
       marker.lat project.latitude
       marker.lng project.longitude
       marker.infowindow render_to_string(partial: "/projects/infowindow", locals: { project: project })
@@ -45,6 +46,7 @@ private
     elsif params[:location].present?
       @programs = programs_based_on_location
       @projects = projects_based_on_location
+      @users = users_based_on_location
     else
       @programs = Program.all
     end
@@ -58,21 +60,29 @@ private
     Project.near(params[:location], 50).order("name")
   end
 
+  def users_based_on_location
+    User.near(params[:location], 50).order("fullname")
+  end
+
   def results_based_on_keyword
     @results = PgSearch.multisearch(params[:search])
     @programs = []
     @projects = []
+    @users = []
 
     @results.each do |document|
       if document.searchable_type == "Program"
         @programs << document.searchable
-      else
+      elsif document.searchable_type == "Project"
         @projects << document.searchable
+      else
+        @users << document.searchable
       end
     end
     if params[:location].present?
       @programs = (@programs & programs_based_on_location)
       @projects = (@projects & projects_based_on_location)
+      @users = (@users & users_based_on_location)
     end
   end
 
