@@ -1,0 +1,10 @@
+<h1>Who's who in the German Development Cooperation in Mindanao?</h1>
+
+<% @users.each do |user| %>
+  <%= link_to user_path(user) do %>
+    <p><%= user.fullname %></p>
+  <% end %>
+  <p><b>Field of expertise</b>: <%= user.expertise %></p>
+<% end %>
+
+
