@@ -5,10 +5,12 @@
 <p> <%= @program.main_office %></p>
 
 <%= render "projects/index" %>
+<%= render "users/index" %>
+
+
 
 <%= link_to 'all programs', programs_path %>
 <%= link_to 'edit', edit_program_path %>
-<%= puts @projects_hash %>
 
 <div id="map" style="width: 100%; height: 400px;"></div>
 

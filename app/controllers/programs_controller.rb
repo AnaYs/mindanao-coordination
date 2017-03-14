@@ -17,6 +17,7 @@ class ProgramsController < ApplicationController
       marker.lng project.longitude
       marker.infowindow render_to_string(partial: "/projects/infowindow", locals: { project: project })
     end
+    @users = User.where(program_id: @program.id)
   end
 
   def new
