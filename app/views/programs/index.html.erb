@@ -1,12 +1,5 @@
-<%= form_tag(programs_path, :method => "get", id: "search-form") do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Search Keyword" %>
-    <%= text_field_tag :location, params[:location], placeholder: "Search Location" %>
-    <%= submit_tag "Search", :name => nil %>
-<% end %>
-
-
 <h1>Programs in Mindanao</h1>
-<% unless @results.nil? %>
+<% if @results.nil? %>
   <h4>Sorry, there were no results for your query.</h4>
 <% end %>
 
