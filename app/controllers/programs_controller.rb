@@ -49,7 +49,7 @@ private
       @projects = projects_based_on_location
       @users = users_based_on_location
     else
-      @programs = Program.all
+      @results = @programs = Program.all
     end
   end
 
