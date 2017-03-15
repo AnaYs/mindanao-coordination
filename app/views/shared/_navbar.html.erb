@@ -1,20 +1,29 @@
-<div id="wrapper">
-  <input type="checkbox" id="menu" name="menu" class="menu-checkbox">
-  <div class="menu">
-    <label class="menu-toggle" for="menu"><span>Toggle</span></label>
-    <ul>
-      <li>
-        <a href="#">Home</a>
+<nav>
+<ul>
+  <li><a href="http://facebook.com">About</a></li>
+  <li><a href="#">Services</a></li>
+  <li><a href="#">Work</a></li>
+</ul>
+<div class="button">
+  <a class="btn-open" href="#"></a>
+</div>
+</nav>
+<div class="overlay">
+  <div class="wrap">
+    <ul class="wrap-nav">
+      <li><a href="#">Search</a>
+      <%= form_tag(programs_path, :method => "get", id: "search-form") do %>
+          <%= text_field_tag :search, params[:search], placeholder: "Search Keyword" %>
+          <%= text_field_tag :location, params[:location], placeholder: "Search Location" %>
+          <%= submit_tag "Search", :name => nil %>
+      <% end %>
       </li>
-      <li>
-        <a href="#">Login</a>
+      <li><a href="<%= programs_path %>">Home</a>
       </li>
-      <li>
-        <a href="#">Sign Up</a>
+      <li><a href="#">Sign In</a>
       </li>
-      <li>
-        <a href="#">Who's Who</a>
+      <li><a href="#">Who's Who</a>
       </li>
     </ul>
   </div>
-</div><!-- #wrapper -->
+</div>
