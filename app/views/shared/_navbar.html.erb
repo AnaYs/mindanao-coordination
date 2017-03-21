@@ -1,0 +1,29 @@
+<!-- SOURCE: http://bootsnipp.com/snippets/featured/fancy-navbar-login-sign-in-form -->
+<nav class="navbar navbar-default navbar-inverse" role="navigation">
+  <div class="container-fluid navbar-color">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="<%= programs_path %>">Mindanao Sector Coordination</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="<%= users_path %>">Who's Who</a></li>
+      </ul>
+      <%= form_tag(programs_path, :method => "get", id: "search-form", :class => "navbar-form navbar-left") do %>
+        <div class="form-group">
+          <%= text_field_tag :search, params[:search], placeholder: "Keyword", :class => "form-control" %>
+          <%= text_field_tag :location, params[:location], placeholder: "Location", :class => "form-control"  %>
+        </div>
+        <%= submit_tag "Search", :name => nil, :class => "btn btn-default" %>
+      <% end %>
+    <%= render "shared/login_toggle" %>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

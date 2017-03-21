@@ -1,73 +1,46 @@
-<%= form_tag(programs_path, :method => "get", id: "search-form") do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Search Keyword" %>
-    <%= text_field_tag :location, params[:location], placeholder: "Search Location" %>
-    <%= submit_tag "Search", :name => nil %>
-<% end %>
+<div id="heading">
+  <h1>Programs in Mindanao</h1>
+</div>
 
-
-<h1>Programs in Mindanao</h1>
-<% unless @results.nil? %>
-  <h4>Sorry, there were no results for your query.</h4>
-<% end %>
-
-<% @programs.each do |program| %>
-
-  <%= link_to program_path(program) do %>
-    <h2> <%= program.name %></h2>
+<div class="col-md-6">
+  <% if @results.empty? %>
+    <h4>Sorry, there were no results for your query.</h4>
   <% end %>
-  <p> <%= program.main_office %></p>
 
-<% end %>
+  <% @programs.each do |program| %>
 
-<% if @projects.present? %>
-  <h2> Relevant Projects: </h2>
-  <% @projects.each do |project| %>
-    <%= link_to program_project_path(project.program, project) do %>
-      <h3> <%= project.name %></h3>
+    <%= link_to program_path(program) do %>
+      <h2> <%= program.name %></h2>
     <% end %>
-    <p> Program: <%= project.program.name %> </p>
-    <p> <%= project.main_office %></p>
-  <% end %>
-<% end %>
+    <p> <%= program.main_office %></p>
 
-<% if @users.present? %>
-  <h2> Users: </h2>
-  <% @users.each do |user| %>
-    <%= link_to user_path(user) do %>
-      <h3> <%= user.fullname %></h3>
+  <% end %>
+
+  <% if @projects.present? %>
+    <h2> Relevant Projects: </h2>
+    <% @projects.each do |project| %>
+      <%= link_to program_project_path(project.program, project) do %>
+        <h3> <%= project.name %></h3>
+      <% end %>
+      <p> Program: <%= project.program.name %> </p>
+      <p> <%= project.main_office %></p>
     <% end %>
-    <p> Program: <%= user.program.name %> </p>
-    <p> Organisation: <%= user.program.organisation %> </p>
-    <p> Expertise: <%= user.expertise %></p>
   <% end %>
-<% end %>
 
-<%= link_to 'add your program', new_program_path %>
-
-<div id="map" style="width: 50%; height: 400px;"></div>
-
-<% content_for(:after_js) do %>
-  <%= javascript_tag do %>
-    $(document).ready(function() {
-      var mapOptions = {
-        scrollwheel: false,
-        mapTypeId: google.maps.MapTypeId.SATELLITE
-      };
-      var handler = Gmaps.build('Google');
-      handler.buildMap({
-        provider: mapOptions,
-        internal: { id:
-        'map' } }, function() {
-        markers = handler.addMarkers(<%= raw @hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-        if (markers.length == 0) {
-          handler.getMap().setZoom(2);
-        } else if (markers.length == 1) {
-          handler.getMap().setZoom(16);
-        }
-        }
-      );
-    });
+  <% if @users.present? %>
+    <h2> Users: </h2>
+    <% @users.each do |user| %>
+      <%= link_to user_path(user) do %>
+        <h3> <%= user.fullname %></h3>
+      <% end %>
+      <p> Program: <%= user.program.name %> </p>
+      <p> Organisation: <%= user.program.organisation %> </p>
+      <p> Expertise: <%= user.expertise %></p>
+    <% end %>
   <% end %>
-<% end %>
+
+  <%= link_to 'add your program', new_program_path %>
+</div>
+
+<%= render "shared/map", :markers => @hash %>
+

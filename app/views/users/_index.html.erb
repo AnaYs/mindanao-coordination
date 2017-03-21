@@ -1,0 +1,10 @@
+<h2><%= @program.name %> staff members</h2>
+
+<% @users.each do |user| %>
+  <%= link_to user_path(user) do %>
+    <p><%= user.fullname %></p>
+  <% end %>
+  <p><b>Field of expertise</b>: <%= user.expertise %></p>
+<% end %>
+
+

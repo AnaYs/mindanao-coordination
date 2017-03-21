@@ -17,6 +17,7 @@ class ProgramsController < ApplicationController
       marker.lng project.longitude
       marker.infowindow render_to_string(partial: "/projects/infowindow", locals: { project: project })
     end
+    @users = User.where(program_id: @program.id)
   end
 
   def new
@@ -47,8 +48,9 @@ private
       @programs = programs_based_on_location
       @projects = projects_based_on_location
       @users = users_based_on_location
+      @results = @programs + @projects + @users
     else
-      @programs = Program.all
+      @results = @programs = Program.all
     end
   end
 
@@ -65,12 +67,12 @@ private
   end
 
   def results_based_on_keyword
-    @results = PgSearch.multisearch(params[:search])
+    results = PgSearch.multisearch(params[:search])
     @programs = []
     @projects = []
     @users = []
 
-    @results.each do |document|
+    results.each do |document|
       if document.searchable_type == "Program"
         @programs << document.searchable
       elsif document.searchable_type == "Project"
@@ -84,6 +86,7 @@ private
       @projects = (@projects & projects_based_on_location)
       @users = (@users & users_based_on_location)
     end
+    @results = @programs + @projects + @users
   end
 
   def set_program
