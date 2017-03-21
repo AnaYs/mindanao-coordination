@@ -1,4 +1,4 @@
-<h1>Who's who at <%= @program.name %></h1>
+<h2><%= @program.name %> staff members</h2>
 
 <% @users.each do |user| %>
   <%= link_to user_path(user) do %>

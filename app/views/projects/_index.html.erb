@@ -1,4 +1,4 @@
-<h1>Projects in <%= @program.name %></h1>
+<h2>Projects in <%= @program.name %></h2>
 
 <% @program.projects.each do |p| %>
   <%= link_to program_project_path(@program, p) do %>
