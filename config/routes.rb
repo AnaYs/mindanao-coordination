@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  resources :users, :only => [:show, :index]
+  resources :users, :only => [:index, :show]
 
   resources :programs, only: [:index, :new, :create, :show, :edit, :update] do
     resources :projects, only: [:index, :new, :create, :show, :edit, :update] do

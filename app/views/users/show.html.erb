@@ -3,4 +3,5 @@
 <p>Organisation: <%= @user.program.organisation %></p>
 <p>Expertise: <%= @user.expertise %></p>
 
+<%= link_to 'edit', edit_user_registration_path(@user) %> |
 <%= link_to 'all programs', programs_path %>
