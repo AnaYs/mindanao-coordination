@@ -8,12 +8,15 @@
   <% end %>
 
   <% @programs.each do |program| %>
-
-    <%= link_to program_path(program) do %>
-      <h2> <%= program.name %></h2>
-    <% end %>
-    <p> <%= program.main_office %></p>
-
+    <div class="card">
+      <div class="card-block">
+        <%= link_to program_path(program) do %>
+          <h2 class="card-title"> <%= program.name %></h2>
+        <% end %>
+        <h6 class="card-subtitle"> <%= program.main_office %></h6>
+        <p class="card-text"><%= program.area_of_work %></p>
+      </div>
+    </div>
   <% end %>
 
   <% if @projects.present? %>
