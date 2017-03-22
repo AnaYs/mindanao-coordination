@@ -2,7 +2,7 @@
 
 <% @users.each do |user| %>
   <%= link_to user_path(user) do %>
-    <p><%= user.fullname %></p>
+    <h4><%= user.fullname %></h4>
   <% end %>
   <p><b>Field of expertise</b>: <%= user.expertise %></p>
 <% end %>
