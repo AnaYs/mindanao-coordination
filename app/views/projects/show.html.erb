@@ -1,35 +1,19 @@
-<h1>Project of <%= @program.name %>: <%= @project.name %></h1>
-<p>Area of work: <%= @project.area_of_work %></p>
-<p>Organisation: <%= @project.organisation %></p>
+<div id="heading">
+  <h1><%= @project.name %></h1>
+  <h3>A project of <%= @program.name %> </h3>
+</div>
+
+<div class="col-md-6">
+  <p><b>Area of work: </b><%= @project.area_of_work %></p>
+  <p><b>Organisation: </b><%= @project.program.organisation %></p>
 
 
-<%= link_to "all projects of #{@project.program.name}", program_path(@project.program) %> |
-<%=  link_to "edit",  edit_program_project_path(@program, @project) %>
+    <!-- link navigation -->
+  <div class="btn-group" role="group" aria-label="...">
+    <%= link_to program_path(@project.program) do %><button type="button" class="btn btn-default btn-override">projects overview <%= @project.program.name %></button><% end %>
+    <%= link_to edit_program_project_path(@program, @project) do %><button type="button" class="btn btn-default btn-override">edit</button><% end %>
+    <%= link_to programs_path do %><button type="button" class="btn btn-default btn-override">all programs</button><% end %>
+  </div>
+</div>
 
-<div id="map" style="width: 50%; height: 400px;"></div>
-
-<% content_for(:after_js) do %>
-  <%= javascript_tag do %>
-    $(document).ready(function() {
-      var mapOptions = {
-        scrollwheel: false,
-        mapTypeId: google.maps.MapTypeId.SATELLITE
-      };
-      var handler = Gmaps.build('Google');
-      handler.buildMap({
-        provider: mapOptions,
-        internal: { id:
-        'map' } }, function() {
-        markers = handler.addMarkers(<%= raw @project_hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-        if (markers.length == 0) {
-          handler.getMap().setZoom(2);
-        } else if (markers.length == 1) {
-          handler.getMap().setZoom(16);
-        }
-        }
-      );
-    });
-  <% end %>
-<% end %>
+<%= render "shared/map", :markers => @project_hash %>

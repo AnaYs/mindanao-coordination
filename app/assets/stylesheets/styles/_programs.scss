@@ -4,3 +4,32 @@
 #heading {
   padding: 20px;
 }
+
+.card {
+  border: 1px solid #222222;
+  border-radius:.25rem;
+  margin: 1.5rem;
+}
+
+.card-block {
+  padding: 1.25rem;
+}
+
+.card-title {
+  margin-bottom:.75rem;
+}
+
+.card-subtitle {
+  margin-bottom: .5rem!important;
+  margin-top: -.375rem;
+  color: #636c72!important;
+}
+
+.btn-override {
+  background-color: transparent!important;
+  border-color:#222222;
+}
+
+.btn-group {
+  padding: 2rem 0;
+}
