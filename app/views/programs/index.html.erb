@@ -22,13 +22,13 @@
   <% if @projects.present? %>
     <h2> Relevant Projects: </h2>
     <% @projects.each do |project| %>
-      <div class="card">
+      <div class="card" style="border: none;">
         <div class="card-block">
           <%= link_to program_project_path(project.program, project) do %>
             <h3 class="card-title"> <%= project.name %></h3>
           <% end %>
           <h6 class="card-subtitle"> <%= project.main_office %></h6>
-          <p class="card-text"> Overarching Program: <%= project.program.name %> </p>
+          <p class="card-text"> Overarching Program: <%= link_to project.program.name, program_path(project.program) %> </p>
           <p class="card-text"> <%= project.area_of_work %> </p>
         </div>
       </div>
@@ -38,12 +38,15 @@
   <% if @users.present? %>
     <h2> Users: </h2>
     <% @users.each do |user| %>
-      <%= link_to user_path(user) do %>
-        <h3> <%= user.fullname %></h3>
-      <% end %>
-      <p> Program: <%= user.program.name %> </p>
-      <p> Organisation: <%= user.program.organisation %> </p>
-      <p> Expertise: <%= user.expertise %></p>
+      <div class="card" style="border: none;">
+        <div class="card-block">
+          <%= link_to user_path(user) do %>
+            <h3 class="card-title"> <%= user.fullname %></h3>
+          <% end %>
+          <h6 class="card-subtitle"> <%= user.program.name %>, <%= user.program.organisation %></h6>
+          <p class="card-text"> Expertise: <%= user.expertise %></p>
+        </div>
+      </div>
     <% end %>
   <% end %>
 

@@ -1,8 +1,12 @@
 <h2>Projects in <%= @program.name %></h2>
 
-<% @program.projects.each do |p| %>
-  <%= link_to program_project_path(@program, p) do %>
-    <p><%= p.name %></p>
-  <% end %>
+<% @program.projects.each do |project| %>
+  <div class="card" style="border: none;">
+    <div class="card-block" style="padding: 0rem!important;">
+      <%= link_to program_project_path(@program, project) do %>
+        <h4 class="card-title"> <%= project.name %></h4>
+      <% end %>
+      <p class="card-text"> <%= project.area_of_work %> </p>
+    </div>
+  </div>
 <% end %>
-

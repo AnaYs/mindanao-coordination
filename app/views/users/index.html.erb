@@ -1,10 +1,13 @@
 <h1>Who's who in the German Development Cooperation in Mindanao?</h1>
 
 <% @users.each do |user| %>
-  <%= link_to user_path(user) do %>
-    <h4><%= user.fullname %></h4>
-  <% end %>
-  <p><b>Field of expertise</b>: <%= user.expertise %></p>
+  <div class="card" style="border: none;">
+    <div class="card-block">
+      <%= link_to user_path(user) do %>
+        <h3 class="card-title"> <%= user.fullname %></h3>
+      <% end %>
+      <h6 class="card-subtitle"> <%= user.program.name %>, <%= user.program.organisation %></h6>
+      <p class="card-text"> Expertise: <%= user.expertise %></p>
+    </div>
+  </div>
 <% end %>
-
-
