@@ -22,11 +22,16 @@
   <% if @projects.present? %>
     <h2> Relevant Projects: </h2>
     <% @projects.each do |project| %>
-      <%= link_to program_project_path(project.program, project) do %>
-        <h3> <%= project.name %></h3>
-      <% end %>
-      <p> Program: <%= project.program.name %> </p>
-      <p> <%= project.main_office %></p>
+      <div class="card">
+        <div class="card-block">
+          <%= link_to program_project_path(project.program, project) do %>
+            <h3 class="card-title"> <%= project.name %></h3>
+          <% end %>
+          <h6 class="card-subtitle"> <%= project.main_office %></h6>
+          <p class="card-text"> Overarching Program: <%= project.program.name %> </p>
+          <p class="card-text"> <%= project.area_of_work %> </p>
+        </div>
+      </div>
     <% end %>
   <% end %>
 
