@@ -1,15 +1,33 @@
-<%= form_for(@program) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name, required: true %>
+<%= form_for(@program, :html => { :class => "form", :role => "form"}) do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, autofocus: true, :placeholder => "name", :class => "form-control", required: true %>
+  </div>
 
-  <%= f.label :main_office %>
-  <%= f.text_field :main_office, required: true %>
+  <div class="form-group">
+    <%= f.label :main_office %>
+    <%= f.text_field :main_office, autocomplete: "off", :placeholder => "address of main office", :class => "form-control", required: true %>
+  </div>
 
-  <%= f.label :area_of_work %>
-  <%= f.text_field :area_of_work, required: true %>
+  <div class="form-group">
+    <%= f.label :area_of_work %>
+    <%= f.text_field :area_of_work, autocomplete: "off", :placeholder => "main areas of work", :class => "form-control", required: true %>
+  </div>
 
-  <%= f.label :organisation %>
-  <%= f.text_field :organisation %>
+  <div class="form-group">
+    <%= f.label :organisation %>
+    <%= f.text_field :organisation, autocomplete: "off", :placeholder => "overarching organisation", :class => "form-control", required: true %>
+  </div>
 
-  <%= f.submit %>
+  <div class="form-group">
+    <%= f.submit "Submit", :class => "btn btn-primary btn-block" %>
+  </div>
+
+  <div class="form-group">
+    <% if @program.id %>
+      <%= link_to 'Cancel', program_path(@program), :class => "btn btn-primary btn-block btn-override"%>
+    <% else %>
+    <%= link_to 'Cancel', programs_path, :class => "btn btn-primary btn-block btn-override"%>
+    <% end %>
+  </div>
 <% end %>
