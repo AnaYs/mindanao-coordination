@@ -7,8 +7,14 @@
   <p><b>Area of work: </b><%= @project.area_of_work %></p>
   <p><b>Organisation: </b><%= @project.program.organisation %></p>
 
-  <%= link_to "Projects Overview #{@project.program.name}", program_path(@project.program) %> |
-  <%= link_to "edit", edit_program_project_path(@program, @project) %>
+
+    <!-- link navigation -->
+  <div class="btn-group" role="group" aria-label="...">
+    <button type="button" class="btn btn-default btn-override"><%= link_to "projects overview #{@project.program.name}", program_path(@project.program) %></button>
+    <button type="button" class="btn btn-default btn-override"><%= link_to "edit", edit_program_project_path(@program, @project) %></button>
+    <button type="button" class="btn btn-default btn-override"><%= link_to "all programs", programs_path %></button>
+  </div>
+
 </div>
 
 <%= render "shared/map", :markers => @project_hash %>
