@@ -11,9 +11,9 @@
 
   <!-- link navigation -->
   <div class="btn-group" role="group" aria-label="...">
-    <button type="button" class="btn btn-default btn-override"><%= link_to 'all programs', programs_path %></button>
-    <button type="button" class="btn btn-default btn-override"><%= link_to 'edit', edit_program_path %></button>
-    <button type="button" class="btn btn-default btn-override"><%= link_to 'add project', new_program_project_path(program_id: @program.id) %></button>
+    <%= link_to programs_path do %><button type="button" class="btn btn-default btn-override">all programs</button><% end %>
+    <%= link_to edit_program_path do %><button type="button" class="btn btn-default btn-override">edit</button><% end %>
+    <%= link_to new_program_project_path(program_id: @program.id) do %><button type="button" class="btn btn-default btn-override">add project</button><% end %>
   </div>
 
 </div>

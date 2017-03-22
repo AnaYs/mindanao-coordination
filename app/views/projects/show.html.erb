@@ -10,11 +10,10 @@
 
     <!-- link navigation -->
   <div class="btn-group" role="group" aria-label="...">
-    <button type="button" class="btn btn-default btn-override"><%= link_to "projects overview #{@project.program.name}", program_path(@project.program) %></button>
-    <button type="button" class="btn btn-default btn-override"><%= link_to "edit", edit_program_project_path(@program, @project) %></button>
-    <button type="button" class="btn btn-default btn-override"><%= link_to "all programs", programs_path %></button>
+    <%= link_to program_path(@project.program) do %><button type="button" class="btn btn-default btn-override">projects overview <%= @project.program.name %></button><% end %>
+    <%= link_to edit_program_project_path(@program, @project) do %><button type="button" class="btn btn-default btn-override">edit</button><% end %>
+    <%= link_to programs_path do %><button type="button" class="btn btn-default btn-override">all programs</button><% end %>
   </div>
-
 </div>
 
 <%= render "shared/map", :markers => @project_hash %>
