@@ -50,8 +50,22 @@ Another model "activity" is envisioned that allows to pinpoint the location and 
 
 ## V2 User Stories
 - I can depict the cover area of programs and projects
+
+There is some documentation for Gmaps4Rails on how to insert polyglons: https://github.com/apneadiving/Google-Maps-for-Rails/wiki/Polygons. The challenge is how we expec the users to input polyglon data.
+
 - I can see images of organisation logos and user profile pictures
+
+Since I am using Heroku (which has an [ephemerel filesystem](https://devcenter.heroku.com/articles/dynos#ephemeral-filesystem)), it would be easiest to use an external image service such as [Cloudinary](http://cloudinary.com/documentation/rails_integration#getting_started_guide).
+
 - I can add individual activities to facilitate collaboration
+
+An "activities" model already exists. Please set up controller and views to enable activitiy CRUD and then include activities in the search methods.
+
+Currently the map always only depicts programs. This can easily be changed by adding all the search results to the hash that is fed to the map.
+
 - I can add multiple offices per program
-- I can see different colors per program and project
+
+Geocoder only codes one address per object, hence it would be easier to allow the creation of multiple offices as separate objects, i.e. with a separate model called "Office" containing the reference to the program (and/or project) and a geocodable address.
+
+If only two addresses per Program is ok, you may refer to [this](http://stackoverflow.com/questions/34482230/geocoder-to-work-with-two-addresses) solution on Stackoverflow.
 
